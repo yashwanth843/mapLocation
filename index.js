@@ -6,6 +6,7 @@ const bcrypt = require("bcryptjs");
 const cors = require("cors");
 const dbpath = path.join(__dirname,"locationServer.db");
 const jwt = require("jsonwebtoken");
+const { error } = require("console");
 const app = express();
 
 app.use(express.json());
@@ -37,11 +38,11 @@ const authenticateToken = (request,response,next) => {
       }
       if (jwtToken === undefined) {
         response.status(401);
-        response.send("Invalid Access Token");
+        response.send({error_msg:"Invalid Access Token"});
       }else {
         jwt.verify(jwtToken, "MY_SECRET_TOKEN", async (error, payload) =>{
             if (error){
-                response.send("Invalid Access Token")
+                response.send({error_msg:"Invalid Access Token"})
             }else {
                 next()
             }
@@ -72,7 +73,7 @@ app.post("/users/", async (request, response) => {
       response.send({ message: "User created successfully", userId: newUserId });
     } else {
       response.status = 400;
-      response.send("User already exists");
+      response.send({error_msg:"User already exists"});
     }
   });
 
@@ -84,7 +85,7 @@ app.post("/users/", async (request, response) => {
     const dbUser = await db.get(selectUserQuery);
     if (dbUser === undefined) {
       response.status(400);
-      response.send("Invalid User");
+      response.send({error_msg:"Invalid User"});
     } else {
       const isPasswordMatched = await bcrypt.compare(password, dbUser.password);
       if (isPasswordMatched === true) {
@@ -95,7 +96,7 @@ app.post("/users/", async (request, response) => {
           response.send({ jwtToken });
       } else {
         response.status(400);
-        response.send("Invalid Password");
+        response.send({error_msg:"Invalid Password"});
       }
     }
   });
