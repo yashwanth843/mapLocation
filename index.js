@@ -3,11 +3,13 @@ const path = require("path");
 const {open} = require("sqlite");
 const sqlite3 = require("sqlite3");
 const bcrypt = require("bcryptjs");
+const cors = require("cors");
 const dbpath = path.join(__dirname,"locationServer.db");
 const jwt = require("jsonwebtoken");
 const app = express();
-app.use(express.json());
 
+app.use(express.json());
+app.use(cors());
 let db;
 
 const initialzeDBAndServer = async () => {
