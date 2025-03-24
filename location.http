@@ -1,0 +1,29 @@
+POST http://localhost:4000/users/
+Content-Type: application/json
+
+{
+    "username": "arjun10",
+    "email": "arjun455@gmail.com",
+    "password": "arjun1265@",
+    "created_at": "2025-02-18"
+}
+
+###
+
+POST http://localhost:4000/login
+Content-Type: application/json
+
+{
+    "username": "sunny123@",
+    "password": "sunny123@"
+}
+
+###
+
+GET http://localhost:4000/dashboard/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1bm55MTIzQCIsImlhdCI6MTc0MjgwNjQ3OH0.DLWCwGrUiopoeo2v-kn9RHPsONssHXdlG7OJqWpqoYQ
+
+###
+
+GET http://localhost:4000/location/Charminar/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InN1bm55MTIzQCIsImlhdCI6MTc0MjgwNjQ3OH0.DLWCwGrUiopoeo2v-kn9RHPsONssHXdlG7OJqWpqoYQ
